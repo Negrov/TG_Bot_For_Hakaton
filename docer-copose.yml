@@ -1,0 +1,21 @@
+services:
+  database:
+    restart: always
+    image: "sqlalchemy: 1.4.50"
+
+    environment:
+      - SQLALCHEMY_USER=${DB_USER}
+      - SQLALCHEMY_PASSWORD=${DB_PASSWORD}
+      - SQLALCHEMY_DB=${DB_NAME}
+
+    ports:
+      - ${DB_PORTS}:1234  #надо порт свободный
+
+    volumse:
+      - ${SQLALCHEMY_DATA_BASE}:/USER/APP  #путь к БД
+
+    networks:
+      - local_net
+
+networks:
+  local_net:
